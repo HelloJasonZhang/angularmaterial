@@ -6,7 +6,7 @@
     .controller('MainController', MainController);
 
   /** @ngInject */
-  function MainController($timeout,$mdSidenav, $log, webDevTec, toastr, userService) {
+  function MainController($timeout,$mdSidenav, $log, $state, webDevTec, toastr, userService) {
     var vm = this;
 
     vm.awesomeThings = [];
@@ -16,6 +16,7 @@
     vm.showToastr = showToastr;
     vm.selectUser = selectUser;
     vm.toggleList = toggleList;
+    vm.go = go;
 
     activate();
     activateUser();
@@ -61,8 +62,14 @@
      * Hide or Show the 'left' sideNav area
      */
     function toggleList() {
-      $log.info('$mdSidenav=');
+     
       $mdSidenav('left').toggle();
+    }
+
+    function go(path, title) {
+       $log.info('path=' + path + " name=" + title);
+        $state.go(path);
+        vm.title = title;
     }
       
   }

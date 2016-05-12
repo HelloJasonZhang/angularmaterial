@@ -1,24 +1,86 @@
-(function() {
+(function () {
   'use strict';
-
   angular
     .module('zlimsui')
-    .controller('AutocompleteCtrl', AutocompleteCtrl);
+    .controller('AutocompleteController', AutocompleteCtrl);
 
   /** @ngInject */
-  function AutocompleteCtrl($timeout,$mdSidenav, $log, toastr) {
+  function AutocompleteCtrl ($timeout, $q, $log) {
     var vm = this;
 
-    vm.classAnimation = '';
+    vm.simulateQuery = false;
+    vm.isDisabled    = false;
 
-    activate();
-   
-    function activate() {
-      $timeout(function() {
-        vm.classAnimation = 'rubberBand';
-      }, 4000);
+    // list of `state` value/display objects
+    vm.states        = loadAll();
+    vm.querySearch   = querySearch;
+    vm.selectedItemChange = selectedItemChange;
+    vm.searchTextChange   = searchTextChange;
+
+    vm.newState = newState;
+
+    function newState(state) {
+      alert("Sorry! You'll need to create a Constituion for " + state + " first!");
     }
 
-      
+    // ******************************
+    // Internal methods
+    // ******************************
+
+    /**
+     * Search for states... use $timeout to simulate
+     * remote dataservice call.
+     */
+    function querySearch (query) {
+      var results = query ? vm.states.filter( createFilterFor(query) ) : vm.states,
+          deferred;
+      if (vm.simulateQuery) {
+        deferred = $q.defer();
+        $timeout(function () { deferred.resolve( results ); }, Math.random() * 1000, false);
+        return deferred.promise;
+      } else {
+        return results;
+      }
+    }
+
+    function searchTextChange(text) {
+      $log.info('Text changed to ' + text);
+    }
+
+    function selectedItemChange(item) {
+      $log.info('Item changed to ' + angular.toJson(item));
+    }
+
+    /**
+     * Build `states` list of key/value pairs
+     */
+    function loadAll() {
+      var allStates = 'Alabama, Alaska, Arizona, Arkansas, California, Colorado, Connecticut, Delaware,\
+              Florida, Georgia, Hawaii, Idaho, Illinois, Indiana, Iowa, Kansas, Kentucky, Louisiana,\
+              Maine, Maryland, Massachusetts, Michigan, Minnesota, Mississippi, Missouri, Montana,\
+              Nebraska, Nevada, New Hampshire, New Jersey, New Mexico, New York, North Carolina,\
+              North Dakota, Ohio, Oklahoma, Oregon, Pennsylvania, Rhode Island, South Carolina,\
+              South Dakota, Tennessee, Texas, Utah, Vermont, Virginia, Washington, West Virginia,\
+              Wisconsin, Wyoming';
+
+      return allStates.split(/, +/g).map( function (state) {
+        return {
+          value: state.toLowerCase(),
+          display: state
+        };
+      });
+    }
+
+    /**
+     * Create filter function for a query string
+     */
+    function createFilterFor(query) {
+      var lowercaseQuery = angular.lowercase(query);
+
+      return function filterFn(state) {
+        return (state.value.indexOf(lowercaseQuery) === 0);
+      };
+
+    }
   }
 })();

@@ -2,6 +2,5 @@
   'use strict';
 
   angular
-    .module('zlimsui', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngMessages', 'ngAria', 'restangular', 'ui.router', 'ngMaterial', 'toastr']);
-
+    .module('zlimsui', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngMessages', 'ngAria', 'restangular', 'ui.router', 'ngMaterial', 'toastr','md.data.table']);
 })();

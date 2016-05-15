@@ -1,42 +1,34 @@
 <div layout="vertical" layout-fill>
-    <!-- Wireframe Container #1 -->
-    <!-- Container #2 -->
-    <!-- Container #3 -->
-    <md-sidenav ng-click="main.toggleList()" md-is-locked-open="$mdMedia('gt-sm')" md-component-id="left" class="md-whiteframe-z2">
+    <md-sidenav ng-click="main.toggleList()" md-is-locked-open="$mdMedia('gt-sm')" md-component-id="left
+" class="md-whiteframe-z2">
         <md-toolbar layout="row" class="md-whiteframe-z1">
             <div class="md-toolbar-tools">
-                <md-button class="md-icon-button" hide-gt-md aria-label="Show Menu">
-                    <ng-md-icon icon="{{menuIcon}}" style="fill:white;vertical-align:middle;" ng-click="menuToggle()" hide-gt-sm></ng-md-icon>
-                </md-button>
                 <h2 style="color:white;">ZLIMS</h2>
             </div>
         </md-toolbar>
-        <md-list>
-            <md-list-item ng-repeat="it in main.users">
-                <md-button ng-click="main.go(it.path, it.name)" ng-class="{'selected' : it === ul.selected }">
-                    <md-icon md-svg-icon="{{it.avatar}}" class="avatar"></md-icon>
-                    {{it.name}}
-                </md-button>
-            </md-list-item>
-        </md-list>
+    <md-content role="navigation">
+      <ul class="side-menu">
+        <li ng-repeat="section in main.menu.sections" class="parent-list-item"
+            ng-class="{'parentActive' : main.isSectionSelected(section)}">
+          <h2 class="menu-heading" ng-if="section.type === 'heading'"
+              id="heading_{{ section.name | nospace }}">
+            {{section}}
+          </h2>
+          <menu-link section="section" ng-if="section.type === 'link'"></menu-link>
+          <menu-toggle section="section" ng-if="section.type === 'toggle'"></menu-toggle>
+        </li>
+      </ul>
+    </md-content>
     </md-sidenav>
     <div layout='column' layout-fill>
         <header>
             <acme-navbar creation-date="main.creationDate"></acme-navbar>
         </header>
-        <main class="md-padding" layout="row" flex>
+        <main class="" layout="row" flex>
             <md-content flex id="content">
                 <div class="fade-view" ui-view="">
                 </div>
             </md-content>
         </main>
-        <!--         <main class="md-padding" layout="row" flex>
-
-            <md-content flex id="content">
-                <md-icon md-svg-icon="{{main.selected.avatar}}" class="avatar"></md-icon>
-                <h2>{{main.selected.name}}</h2>
-                <p>{{main.selected.content}}</p>
-            </md-content>
-        </main> -->
     </div>
 </div>

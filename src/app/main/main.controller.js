@@ -1,12 +1,12 @@
 (function() {
-  'use strict';
+
 
   angular
     .module('zlimsui')
     .controller('MainController', MainController);
 
   /** @ngInject */
-  function MainController($timeout,$mdSidenav, $log, $state, webDevTec, toastr, userService) {
+  function MainController($timeout,$mdSidenav, $log, $state, webDevTec, toastr, userService,menu) {
     var vm = this;
 
     vm.awesomeThings = [];
@@ -20,6 +20,27 @@
 
     activate();
     activateUser();
+
+
+    //functions for menu-link and menu-toggle
+    vm.isOpen = isOpen;
+    vm.toggleOpen = toggleOpen;
+    vm.autoFocusContent = false;
+    vm.menu = menu;
+
+    vm.status = {
+      isFirstOpen: true,
+      isFirstDisabled: false
+    };
+
+
+    function isOpen(section) {
+      return menu.isSectionSelected(section);
+    }
+
+    function toggleOpen(section) {
+      menu.toggleSelectSection(section);
+    }
 
     function activate() {
       getWebDevTec();

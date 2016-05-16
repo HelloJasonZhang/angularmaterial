@@ -1,10 +1,10 @@
 # Usage
 
-npm install -g generator-gulp-angular
+npm install -g gulp bower
 ```
 Install the required tools:  `gulp`, `bower`
 ```
-npm install -g  gulp bower
+start ui server
 ```
 Run `gulp server`
 ```
@@ -17,3 +17,6 @@ Run `gulp server`
 * `gulp test:auto` to launch your unit tests with Karma in watch mode
 * `gulp protractor` to launch your e2e tests with Protractor
 * `gulp protractor:dist` to launch your e2e tests with Protractor on the dist files
+
+copy the url: localhost:3000 into the Bowser 
+```

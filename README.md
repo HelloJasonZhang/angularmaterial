@@ -7,7 +7,7 @@
 ### start server
 	Run gulp server
   
-## Use Gulp tasks
+### Use Gulp tasks
 
 * `gulp` or `gulp build` to build an optimized version of your application in `/dist`
 * `gulp serve` to launch a browser sync server on your source files
@@ -18,4 +18,4 @@
 * `gulp protractor:dist` to launch your e2e tests with Protractor on the dist files
 
 ### copy the url: [localhost:3000](localhost:3000) into the Bowser 
-  localhost:3000	
+	localhost:3000

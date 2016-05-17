@@ -1,13 +1,16 @@
 # Usage
 
 ### install the required tools: gulp, bower
-	  Run npm install -g gulp bower
+
+	Run npm install -g gulp bower
 
 ### install npm package and bower package
-    Run 'npm install & bower install'
+
+  Run 'npm install & bower install'
 
 ### start server
-    Run gulp server
+
+  Run gulp server
 
 ## Use Gulp tasks
 
@@ -20,4 +23,5 @@
 * `gulp protractor:dist` to launch your e2e tests with Protractor on the dist files
 
 ### copy the url: [localhost:3000](localhost:3000) into the Bowser 
+
 	  localhost:3000	

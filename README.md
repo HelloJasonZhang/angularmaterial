@@ -1,11 +1,11 @@
 # Usage
 
 ### install the required tools: gulp, bower
-	Run npm install -g gulp bower
+	npm install -g gulp bower
 ### install npm package and bower package
-	Run npm install & bower install
+	npm install & bower install
 ### start server
-	Run gulp server
+	gulp server
   
 ### Use Gulp tasks
 
